@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}GestureSpeak AI - Home{% endblock %}
+
+{% block content %}
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Turn <span class="highlight">Indian Sign Language</span> into Voice, Instantly
+        </h1>
+        <p class="hero-subtitle">
+            GestureSpeak AI watches your hands and speaks your words — real-time
+            ISL gesture recognition powered by AI, turning every sign into
+            text and speech.
+        </p>
+        <button class="btn-primary" id="startRecognitionBtn">
+            Start Recognition
+        </button>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">🖐️</div>
+            <h3 class="feature-title">Real-Time Recognition</h3>
+            <p class="feature-description">
+                Instantly detects and interprets Indian Sign Language gestures
+                as they happen, with no lag between sign and result.
+            </p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3 class="feature-title">Text &amp; Speech Output</h3>
+            <p class="feature-description">
+                Converts recognized gestures into clear written text and
+                natural spoken audio, making communication two-way.
+            </p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3 class="feature-title">Learn ISL</h3>
+            <p class="feature-description">
+                Explore Indian Sign Language gestures and build your
+                vocabulary with guided lessons and references.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

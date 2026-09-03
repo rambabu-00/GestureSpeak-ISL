@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}GestureSpeak AI - Recognition{% endblock %}
+
+{% block content %}
+
+<section class="recognition-page">
+
+    <h1>ISL Recognition</h1>
+
+    <p>Allow camera access to start recognizing gestures.</p>
+
+    <div class="camera-container">
+        <video id="camera" autoplay playsinline></video>
+        <canvas id="landmarkCanvas"></canvas>
+    </div>
+
+    <button id="startCameraBtn" class="btn-primary">
+        Start Camera
+    </button>
+
+    <p id="cameraStatus">Camera not started</p>
+    <p id="handStatus" class="hand-status">No hand detected</p>
+
+    <div class="prediction-box" id="predictionBox">
+        <p id="predictionResult">Predicted sign: --</p>
+        <p id="confidenceResult">Confidence: --%</p>
+        <p id="predictionNote" class="prediction-note"></p>
+    </div>
+
+    <details class="landmark-debug">
+        <summary>Show landmark coordinates (debug)</summary>
+        <pre id="landmarkCoords"></pre>
+    </details>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- MediaPipe Hands: browser-side hand landmark detection.
+     These only find hand points -- they do NOT recognize ISL. -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="{{ url_for('static', filename='js/handTracking.js') }}"></script>
+{% endblock %}
