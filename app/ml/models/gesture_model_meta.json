@@ -1,0 +1,17 @@
+{
+  "data_source": "app/ml/data/synthetic_test_data.csv",
+  "is_synthetic_test_data": true,
+  "num_training_samples": 360,
+  "num_test_samples": 90,
+  "test_accuracy": 1.0,
+  "feature_representation": "compact_pose_delta_summary_v1",
+  "feature_dim": 189,
+  "labels": [
+    "TEST_CLOSED_FIST",
+    "TEST_OPEN_HAND",
+    "TEST_POINT_UP"
+  ],
+  "input_dim": 189,
+  "hidden_dim": 64,
+  "saved_at": "2026-09-07T17:18:21"
+}
