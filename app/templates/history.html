@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}GestureSpeak AI - History{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Recognition History</h1>
+    <p>Review previously recognized words and sentences.</p>
+</div>
+
+<section class="history-layout">
+    <div id="historyList">
+        <!-- Rendered by history.js from localStorage -->
+    </div>
+
+    <div class="history-footer-actions">
+        <button id="clearHistoryBtn" class="btn btn-outline">Clear History</button>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

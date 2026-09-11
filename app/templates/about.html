@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}GestureSpeak AI - About{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>About GestureSpeak AI</h1>
+</div>
+
+<section class="about-layout">
+    <div class="about-block">
+        <h2>Mission</h2>
+        <p>
+            Use technology to explore more accessible communication through
+            Indian Sign Language.
+        </p>
+    </div>
+
+    <div class="about-block">
+        <h2>Technology</h2>
+        <div class="tech-list">
+            <span class="tech-chip">Computer Vision</span>
+            <span class="tech-chip">MediaPipe</span>
+            <span class="tech-chip">Machine Learning</span>
+            <span class="tech-chip">Flask</span>
+            <span class="tech-chip">HTML / CSS / JavaScript</span>
+            <span class="tech-chip planned">WebRTC (planned)</span>
+        </div>
+    </div>
+
+    <div class="about-block">
+        <h2>Project Status</h2>
+        <p>
+            GestureSpeak AI is an evolving project. Hand landmark detection
+            and the recognition pipeline are actively being developed; video
+            calling and emergency-alert delivery are designed in the
+            interface but not yet connected to live services.
+        </p>
+    </div>
+</section>
+
+{% endblock %}

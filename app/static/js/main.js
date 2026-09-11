@@ -1,6 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Start Recognition button
+    // Mobile navigation toggle (hamburger menu). The Emergency button
+    // lives outside this collapsible menu on purpose, so it stays
+    // reachable without opening the menu.
+    const navToggle = document.getElementById("navToggle");
+    const navbarLinks = document.getElementById("navbarLinks");
+
+    if (navToggle && navbarLinks) {
+        navToggle.addEventListener("click", function () {
+            const isOpen = navbarLinks.classList.toggle("is-open");
+            navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        // Close the mobile menu after a link is chosen.
+        navbarLinks.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                navbarLinks.classList.remove("is-open");
+                navToggle.setAttribute("aria-expanded", "false");
+            });
+        });
+    }
+
+    // Start Recognition button (legacy hook -- kept for compatibility;
+    // the current homepage links directly to /recognition, so this is
+    // a harmless no-op unless a #startRecognitionBtn element exists).
     const startButton = document.getElementById("startRecognitionBtn");
 
     if (startButton) {

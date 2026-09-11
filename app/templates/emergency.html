@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}GestureSpeak AI - Emergency Alert{% endblock %}
+
+{% block head %}
+<style>body { background-color: #fff8f8; }</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="emergency-hero">
+    <h1><span aria-hidden="true">🚨</span> Emergency Alert</h1>
+    <p>Need immediate assistance?</p>
+    <div class="demo-banner">
+        ⚠ Demo mode: emergency alerts are not yet connected to a real SMS,
+        call, or notification service. No message is actually sent.
+    </div>
+</div>
+
+<div class="emergency-tabs" role="tablist">
+    <button class="emergency-tab active" data-panel="panelAlert" role="tab" aria-selected="true">Send Alert</button>
+    <button class="emergency-tab" data-panel="panelContacts" role="tab" aria-selected="false">Trusted Contacts</button>
+</div>
+
+<!-- ===== SEND ALERT PANEL ===== -->
+<div class="emergency-panel" id="panelAlert">
+    <div class="emergency-categories">
+        <button class="emergency-category-btn" data-type="Medical Emergency" data-icon="🏥">
+            <span class="emergency-category-icon" aria-hidden="true">🏥</span>
+            Medical Emergency
+        </button>
+        <button class="emergency-category-btn" data-type="Fire" data-icon="🔥">
+            <span class="emergency-category-icon" aria-hidden="true">🔥</span>
+            Fire
+        </button>
+        <button class="emergency-category-btn" data-type="Accident" data-icon="🚗">
+            <span class="emergency-category-icon" aria-hidden="true">🚗</span>
+            Accident
+        </button>
+        <button class="emergency-category-btn" data-type="Danger / Threat" data-icon="⚠">
+            <span class="emergency-category-icon" aria-hidden="true">⚠</span>
+            Danger / Threat
+        </button>
+        <button class="emergency-category-btn" data-type="Police Assistance" data-icon="👮">
+            <span class="emergency-category-icon" aria-hidden="true">👮</span>
+            Police Assistance
+        </button>
+        <button class="emergency-category-btn" data-type="General Help" data-icon="🆘">
+            <span class="emergency-category-icon" aria-hidden="true">🆘</span>
+            General Help
+        </button>
+    </div>
+</div>
+
+<!-- ===== TRUSTED CONTACTS PANEL ===== -->
+<div class="emergency-panel" id="panelContacts" hidden>
+    <div class="contacts-layout">
+        <div class="section-head" style="margin-bottom: 1.5rem;">
+            <h2 class="section-title" style="font-size:1.3rem;">Emergency Contacts</h2>
+            <p class="section-subtitle">Trusted contacts will receive emergency alerts. Set them up once, ahead of time.</p>
+        </div>
+
+        <div id="contactsList"><!-- rendered by emergency.js --></div>
+
+        <form class="add-contact-form" id="addContactForm">
+            <input type="text" id="contactName" placeholder="Name (e.g. Mom)" required aria-label="Contact name">
+            <input type="tel" id="contactPhone" placeholder="+91 XXXXX XXXXX" required aria-label="Contact phone number">
+            <button type="submit" class="btn btn-primary">+ Add Trusted Contact</button>
+        </form>
+    </div>
+</div>
+
+<!-- ===== MODAL: confirm / sending / success / failure ===== -->
+<div class="modal-overlay" id="emergencyModal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="emergencyModalTitle">
+        <button class="modal-close" id="emergencyModalClose" aria-label="Close">✕</button>
+        <div id="emergencyModalBody"><!-- state content injected by emergency.js --></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/emergency.js') }}"></script>
+{% endblock %}

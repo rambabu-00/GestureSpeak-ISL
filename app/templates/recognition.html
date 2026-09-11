@@ -1,37 +1,97 @@
 {% extends "base.html" %}
 
-{% block title %}GestureSpeak AI - Recognition{% endblock %}
+{% block title %}GestureSpeak AI - Recognize{% endblock %}
 
 {% block content %}
 
-<section class="recognition-page">
+<div class="page-header">
+    <h1>Real-Time ISL Recognition</h1>
+    <p>Show an Indian Sign Language gesture to the camera.</p>
+</div>
 
-    <h1>ISL Recognition</h1>
+<section class="recognition-layout">
 
-    <p>Allow camera access to start recognizing gestures.</p>
+    <!-- LEFT: camera -->
+    <div class="camera-panel">
+        <div class="camera-container">
+            <video id="camera" autoplay playsinline muted></video>
+            <canvas id="landmarkCanvas"></canvas>
 
-    <div class="camera-container">
-        <video id="camera" autoplay playsinline></video>
-        <canvas id="landmarkCanvas"></canvas>
+            <!-- Shown until the user starts the camera; hidden via JS once a stream is attached. -->
+            <div class="camera-placeholder" id="cameraPlaceholder">
+                <span class="placeholder-emoji" aria-hidden="true">🤟</span>
+                <span>Camera not started</span>
+            </div>
+        </div>
+
+        <div class="camera-controls">
+            <button id="startCameraBtn" class="btn btn-primary">
+                <span aria-hidden="true">▶</span> Start Camera
+            </button>
+            <button id="stopCameraBtn" class="btn btn-outline" disabled>
+                <span aria-hidden="true">■</span> Stop Camera
+            </button>
+        </div>
+
+        <div class="status-row" role="status" aria-live="polite">
+            <span class="status-pill" id="cameraStatusPill">
+                <span class="status-dot"></span>
+                <span id="cameraStatus">Camera not started</span>
+            </span>
+            <span class="status-pill" id="handStatusPill">
+                <span class="status-dot"></span>
+                <span id="handStatus" class="hand-status">No hand detected</span>
+            </span>
+        </div>
+
+        <details class="landmark-debug">
+            <summary>Show landmark coordinates (debug)</summary>
+            <pre id="landmarkCoords"></pre>
+        </details>
     </div>
 
-    <button id="startCameraBtn" class="btn-primary">
-        Start Camera
-    </button>
+    <!-- RIGHT: recognition result + sentence builder -->
+    <div class="result-panel">
 
-    <p id="cameraStatus">Camera not started</p>
-    <p id="handStatus" class="hand-status">No hand detected</p>
+        <div class="result-card">
+            <h2>Recognized Sign</h2>
+            <p class="recognized-sign" id="predictionResult">Predicted sign: --</p>
+            <p class="confidence-row" id="confidenceResult">Confidence: --%</p>
+            <p class="prediction-note" id="predictionNote"></p>
 
-    <div class="prediction-box" id="predictionBox">
-        <p id="predictionResult">Predicted sign: --</p>
-        <p id="confidenceResult">Confidence: --%</p>
-        <p id="predictionNote" class="prediction-note"></p>
+            <div class="btn-row" style="margin-top: 1.25rem;">
+                <button id="speakSignBtn" class="btn btn-secondary">
+                    <span aria-hidden="true">🔊</span> Speak
+                </button>
+                <button id="addToSentenceBtn" class="btn btn-secondary">
+                    <span aria-hidden="true">＋</span> Add to Sentence
+                </button>
+                <button id="clearSignBtn" class="btn btn-outline">
+                    Clear
+                </button>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <h2>Sentence Builder</h2>
+            <div class="sentence-track" id="sentenceTrack">
+                <span class="sentence-empty" id="sentenceEmptyMsg">No signs added yet.</span>
+            </div>
+
+            <h2>Your Message</h2>
+            <div class="sentence-output" id="sentenceOutput">—</div>
+
+            <div class="btn-row">
+                <button id="speakSentenceBtn" class="btn btn-primary">
+                    <span aria-hidden="true">🔊</span> Speak Sentence
+                </button>
+                <button id="clearSentenceBtn" class="btn btn-outline">
+                    Clear Sentence
+                </button>
+            </div>
+        </div>
+
     </div>
-
-    <details class="landmark-debug">
-        <summary>Show landmark coordinates (debug)</summary>
-        <pre id="landmarkCoords"></pre>
-    </details>
 
 </section>
 
@@ -44,4 +104,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
 <script src="{{ url_for('static', filename='js/handTracking.js') }}"></script>
+<script src="{{ url_for('static', filename='js/recognition.js') }}"></script>
 {% endblock %}

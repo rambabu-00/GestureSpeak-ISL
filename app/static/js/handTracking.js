@@ -228,5 +228,18 @@
         mpCamera.start();
     }
 
+    // Lets other scripts (e.g. the Stop Camera button in
+    // recognition.js) fully stop the MediaPipe processing loop, not
+    // just the raw camera stream. Without this, mpCamera keeps
+    // calling hands.send() in the background even after the video's
+    // stream has been stopped, and the "already running" guard above
+    // would otherwise prevent it from ever starting again.
+    video.addEventListener("gesturespeak:stopcamera", () => {
+        if (mpCamera) {
+            mpCamera.stop();
+            mpCamera = null;
+        }
+    });
+
     video.addEventListener("playing", startHandTracking);
 })();

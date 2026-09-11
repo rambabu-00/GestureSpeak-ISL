@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}GestureSpeak AI - Learn ISL{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Learn Indian Sign Language</h1>
+    <p>Explore common ISL signs and practice them with GestureSpeak AI.</p>
+</div>
+
+<div class="learn-toolbar container">
+    <div class="search-box">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="signSearchInput" placeholder="Search signs..." aria-label="Search signs">
+    </div>
+    <div class="category-filters" id="categoryFilters" role="tablist" aria-label="Sign categories">
+        <button class="category-chip active" data-category="all">All</button>
+        <button class="category-chip" data-category="greetings">Greetings</button>
+        <button class="category-chip" data-category="people">People</button>
+        <button class="category-chip" data-category="actions">Actions</button>
+        <button class="category-chip" data-category="daily">Daily Life</button>
+        <button class="category-chip" data-category="emergency">Emergency</button>
+    </div>
+</div>
+
+<p class="section-subtitle" style="text-align:center; margin-bottom: 2rem;">
+    Sign content below is placeholder/example data until verified ISL reference
+    images and instructions are added.
+</p>
+
+<section class="signs-grid container" id="signsGrid">
+    <!-- Cards are rendered by learn.js from a placeholder data set -->
+</section>
+
+<!-- Sign detail modal -->
+<div class="modal-overlay" id="signModal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signModalTitle">
+        <button class="modal-close" id="signModalClose" aria-label="Close">✕</button>
+        <span class="modal-badge" id="signModalCategory">Category</span>
+        <h2 class="modal-title" id="signModalTitle">Sign Name</h2>
+        <div class="modal-visual" id="signModalVisual" aria-hidden="true">🤟</div>
+        <p class="modal-desc" id="signModalDesc">Description goes here.</p>
+        <a href="{{ url_for('main.recognition') }}" class="btn btn-primary btn-block">Practice This Sign</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/learn.js') }}"></script>
+{% endblock %}

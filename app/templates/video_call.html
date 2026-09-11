@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}GestureSpeak AI - Video Call{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Video Call</h1>
+    <p>Communicate using video, ISL recognition and speech.</p>
+</div>
+
+<div class="videocall-banner">
+    ⚠ Preview only: this page shows the planned Video Call interface. Real-time
+    calling (WebRTC) and live ISL translation during a call are not connected yet.
+</div>
+
+<section class="videocall-layout">
+    <div class="videocall-stage">
+
+        <div class="video-tile video-tile-remote" id="remoteTile">
+            <span>Other person will appear here once calling is connected</span>
+        </div>
+
+        <div class="video-tile video-tile-local" id="localTile">
+            <video id="localVideo" autoplay playsinline muted></video>
+            <span class="video-tile-label">You</span>
+        </div>
+
+        <div class="call-controls">
+            <button id="startPreviewBtn" class="btn btn-primary">Start Camera Preview</button>
+            <button class="call-control-btn" id="muteBtn" aria-label="Mute microphone" title="Mute microphone">🎤</button>
+            <button class="call-control-btn" id="cameraToggleBtn" aria-label="Toggle camera" title="Toggle camera">📹</button>
+            <button class="call-control-btn" id="speechToggleBtn" aria-label="Toggle speech output" title="Toggle speech output">🔊</button>
+            <button class="call-control-btn end-call" id="endCallBtn" aria-label="End call" title="End call">📞</button>
+        </div>
+
+        <div class="call-info-grid">
+            <div class="call-info-card">
+                <h4>Detected Sign</h4>
+                <p id="detectedSign">--</p>
+            </div>
+            <div class="call-info-card">
+                <h4>Natural Language</h4>
+                <p id="naturalLanguage">"Not connected yet"</p>
+            </div>
+        </div>
+
+        <div class="call-toggles">
+            <span>ISL → Speech: <span class="on">ON (planned)</span></span>
+            <span>Speech → Text: <span class="on">ON (planned)</span></span>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/video_call.js') }}"></script>
+{% endblock %}

@@ -7,12 +7,37 @@ main = Blueprint("main", __name__)
 
 @main.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", active_page="home")
 
 
 @main.route("/recognition")
 def recognition():
-    return render_template("recognition.html")
+    return render_template("recognition.html", active_page="recognize")
+
+
+@main.route("/video-call")
+def video_call():
+    return render_template("video_call.html", active_page="video_call")
+
+
+@main.route("/learn")
+def learn():
+    return render_template("learn.html", active_page="learn")
+
+
+@main.route("/history")
+def history():
+    return render_template("history.html", active_page="history")
+
+
+@main.route("/emergency")
+def emergency():
+    return render_template("emergency.html", active_page="emergency")
+
+
+@main.route("/about")
+def about():
+    return render_template("about.html", active_page="about")
 
 
 @main.route("/predict", methods=["POST"])

@@ -1,50 +1,185 @@
 {% extends "base.html" %}
 
-{% block title %}GestureSpeak AI - Home{% endblock %}
+{% block title %}GestureSpeak AI - Communicate Without Barriers{% endblock %}
 
 {% block content %}
+
+<!-- ===================== HERO ===================== -->
 <section class="hero" id="home">
-    <div class="hero-content">
+    <div class="hero-copy">
+        <span class="hero-eyebrow">🤟 GestureSpeak AI</span>
         <h1 class="hero-title">
-            Turn <span class="highlight">Indian Sign Language</span> into Voice, Instantly
+            Communicate Without Barriers.<br>
+            Turn <span class="highlight">Indian Sign Language</span> into Speech &amp; Text.
         </h1>
         <p class="hero-subtitle">
-            GestureSpeak AI watches your hands and speaks your words — real-time
-            ISL gesture recognition powered by AI, turning every sign into
-            text and speech.
+            GestureSpeak AI uses computer vision and machine learning to
+            recognize ISL gestures and help people communicate more easily.
         </p>
-        <button class="btn-primary" id="startRecognitionBtn">
-            Start Recognition
-        </button>
+        <div class="btn-row">
+            <a href="{{ url_for('main.recognition') }}" class="btn btn-primary btn-lg">Start Recognizing</a>
+            <a href="{{ url_for('main.learn') }}" class="btn btn-secondary btn-lg">Learn ISL</a>
+        </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-card">
+            <div class="hero-visual-ring"></div>
+            <span class="hero-visual-emoji">🤟</span>
+        </div>
     </div>
 </section>
 
-<section class="features" id="features">
-    <div class="features-container">
-        <div class="feature-card">
-            <div class="feature-icon">🖐️</div>
-            <h3 class="feature-title">Real-Time Recognition</h3>
-            <p class="feature-description">
-                Instantly detects and interprets Indian Sign Language gestures
-                as they happen, with no lag between sign and result.
+<!-- ===================== EMERGENCY CALLOUT (appears immediately after hero) ===================== -->
+<section class="emergency-callout">
+    <div class="emergency-callout-card">
+        <div class="emergency-callout-text">
+            <h2><span aria-hidden="true">🚨</span> Emergency Alert</h2>
+            <p>
+                Need immediate assistance? Send an emergency alert to your
+                predefined trusted contacts without having to select contacts
+                during the emergency.
             </p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">💬</div>
-            <h3 class="feature-title">Text &amp; Speech Output</h3>
-            <p class="feature-description">
-                Converts recognized gestures into clear written text and
-                natural spoken audio, making communication two-way.
-            </p>
+        <a href="{{ url_for('main.emergency') }}" class="btn btn-danger btn-lg">
+            <span aria-hidden="true">🚨</span> Get Emergency Help
+        </a>
+    </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section class="section section-alt">
+    <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-title">Three simple steps</h2>
+    </div>
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-number">01</div>
+            <h3 class="step-title">Show Your Sign</h3>
+            <p class="step-desc">Show an ISL gesture in front of the camera.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">📚</div>
-            <h3 class="feature-title">Learn ISL</h3>
-            <p class="feature-description">
-                Explore Indian Sign Language gestures and build your
-                vocabulary with guided lessons and references.
-            </p>
+        <div class="step-card">
+            <div class="step-number">02</div>
+            <h3 class="step-title">AI Recognizes</h3>
+            <p class="step-desc">GestureSpeak AI analyzes the gesture using MediaPipe hand tracking and a trained classifier.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Text &amp; Speech</h3>
+            <p class="step-desc">The recognized sign becomes text and can be spoken aloud.</p>
         </div>
     </div>
 </section>
+
+<!-- ===================== CORE FEATURES ===================== -->
+<section class="section" id="features">
+    <div class="section-head">
+        <span class="eyebrow">What's inside</span>
+        <h2 class="section-title">Core features</h2>
+        <p class="section-subtitle">Some features are live today; others are still being connected.</p>
+    </div>
+    <div class="features-grid container">
+        <div class="card feature-card">
+            <div class="feature-icon" aria-hidden="true">🤟</div>
+            <h3 class="feature-title">ISL Recognition</h3>
+            <p class="feature-description">Real-time Indian Sign Language hand-landmark recognition.</p>
+            <span class="feature-status status-live">Available</span>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon" aria-hidden="true">🔊</div>
+            <h3 class="feature-title">Text to Speech</h3>
+            <p class="feature-description">Convert recognized signs into spoken language right in your browser.</p>
+            <span class="feature-status status-live">Available</span>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon" aria-hidden="true">📹</div>
+            <h3 class="feature-title">Video Communication</h3>
+            <p class="feature-description">Communicate during video calls using ISL-to-speech.</p>
+            <span class="feature-status status-planned">Planned</span>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon" aria-hidden="true">📚</div>
+            <h3 class="feature-title">Learn ISL</h3>
+            <p class="feature-description">Explore and practice common Indian Sign Language signs.</p>
+            <span class="feature-status status-live">Available</span>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon" aria-hidden="true">🕘</div>
+            <h3 class="feature-title">Recognition History</h3>
+            <p class="feature-description">Review previously recognized words and sentences.</p>
+            <span class="feature-status status-live">Available</span>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon" aria-hidden="true">🚨</div>
+            <h3 class="feature-title">Emergency Alert</h3>
+            <p class="feature-description">Quickly notify predefined trusted contacts.</p>
+            <span class="feature-status status-planned">UI Preview</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== VIDEO CALL EXPLAINER ===================== -->
+<section class="section section-alt">
+    <div class="section-head">
+        <span class="eyebrow">Coming soon</span>
+        <h2 class="section-title">Communicate in Real Time</h2>
+        <p class="section-subtitle">
+            Use GestureSpeak AI during a video call to help bridge
+            communication between ISL and spoken language.
+        </p>
+    </div>
+
+    <div class="flow-columns">
+        <div class="flow-col">
+            <h4>Deaf / Non-Speaking User</h4>
+            <ul class="flow-steps">
+                <li>ISL Gesture</li>
+                <li class="flow-arrow">↓</li>
+                <li>AI Recognition</li>
+                <li class="flow-arrow">↓</li>
+                <li>Natural Sentence</li>
+                <li class="flow-arrow">↓</li>
+                <li>🔊 Speech</li>
+            </ul>
+        </div>
+        <div class="flow-col">
+            <h4>Other Person</h4>
+            <ul class="flow-steps">
+                <li>Spoken Language</li>
+                <li class="flow-arrow">↓</li>
+                <li>Speech Recognition</li>
+                <li class="flow-arrow">↓</li>
+                <li>Text</li>
+                <li class="flow-arrow">↓</li>
+                <li>Deaf User Reads Message</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="btn-row" style="justify-content: center; margin-top: 2.5rem;">
+        <a href="{{ url_for('main.video_call') }}" class="btn btn-primary btn-lg">Start Video Call</a>
+    </div>
+</section>
+
+<!-- ===================== WHY GESTURESPEAK ===================== -->
+<section class="section">
+    <div class="why-section">
+        <span class="eyebrow">Why GestureSpeak</span>
+        <h2 class="section-title">Communication should be accessible to everyone</h2>
+        <p>
+            GestureSpeak AI is designed to explore how computer vision and AI
+            can help bridge communication gaps for Indian Sign Language users.
+        </p>
+    </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="section">
+    <div class="final-cta">
+        <h2>Ready to communicate?</h2>
+        <p>Start using GestureSpeak AI.</p>
+        <a href="{{ url_for('main.recognition') }}" class="btn btn-primary btn-lg">Start Recognizing</a>
+    </div>
+</section>
+
 {% endblock %}
