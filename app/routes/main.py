@@ -17,7 +17,13 @@ def recognition():
 
 @main.route("/video-call")
 def video_call():
-    return render_template("video_call.html", active_page="video_call")
+    # Optional: a room can be pre-selected via ?room=<id> (e.g. from a
+    # shared link). If absent, the page itself lets the user create or
+    # enter one. No validation happens here -- the room ID is only
+    # actually used once the client sends it to the Socket.IO "join"
+    # event, which does validate it (see app/sockets.py).
+    room = request.args.get("room", "").strip()
+    return render_template("video_call.html", active_page="video_call", room=room)
 
 
 @main.route("/learn")

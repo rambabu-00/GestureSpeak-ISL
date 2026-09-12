@@ -10,28 +10,67 @@
 </div>
 
 <div class="videocall-banner">
-    ⚠ Preview only: this page shows the planned Video Call interface. Real-time
-    calling (WebRTC) and live ISL translation during a call are not connected yet.
+    ⚠ Development prototype: real-time group calling works for local testing
+    (e.g. on the same network), but has no TURN server configured. Calling
+    across different networks may fail without one, and this page is not
+    hardened for public deployment. Live ISL translation during a call is
+    not connected yet.
 </div>
 
 <section class="videocall-layout">
-    <div class="videocall-stage">
 
-        <div class="video-tile video-tile-remote" id="remoteTile">
-            <span>Other person will appear here once calling is connected</span>
+    <!-- ===== ROOM JOIN PANEL (shown before joining a call) ===== -->
+    <div class="videocall-stage" id="joinPanel">
+        <h2 style="margin-bottom: 0.5rem;">Join or Create a Room</h2>
+        <p class="section-subtitle" style="margin-bottom: 1.25rem;">
+            Enter a room ID to join an existing call, or leave it blank to
+            create a new one and share the ID with others.
+        </p>
+
+        <div class="add-contact-form" style="grid-template-columns: 1fr auto;">
+            <input type="text" id="roomIdInput" placeholder="Room ID (leave blank to create one)"
+                   value="{{ room }}" aria-label="Room ID" maxlength="32">
+            <button id="generateRoomBtn" class="btn btn-outline" type="button">Generate ID</button>
         </div>
 
-        <div class="video-tile video-tile-local" id="localTile">
-            <video id="localVideo" autoplay playsinline muted></video>
-            <span class="video-tile-label">You</span>
+        <div class="btn-row" style="margin-top: 1.25rem;">
+            <button id="joinRoomBtn" class="btn btn-primary btn-lg">Join Room</button>
+        </div>
+
+        <p class="prediction-note is-warning" id="joinError" style="margin-top: 1rem;"></p>
+    </div>
+
+    <!-- ===== ACTIVE CALL UI (hidden until a room is joined) ===== -->
+    <div class="videocall-stage" id="callPanel" hidden>
+
+        <div class="call-info-grid" style="margin-top: 0;">
+            <div class="call-info-card">
+                <h4>Room ID</h4>
+                <p id="activeRoomId">--</p>
+            </div>
+            <div class="call-info-card">
+                <h4>Connection Status</h4>
+                <p id="connectionStatus">--</p>
+            </div>
+        </div>
+
+        <div class="btn-row" style="margin: 1rem 0 1.5rem;">
+            <button id="copyRoomBtn" class="btn btn-secondary">📋 Copy Room ID</button>
+            <button id="leaveRoomBtn" class="btn btn-outline">Leave Room</button>
+        </div>
+
+        <p class="prediction-note is-warning" id="callError"></p>
+
+        <div class="video-grid" id="videoGrid">
+            <!-- Video tiles are created/removed here by video_call.js,
+                 one per participant (local tile always included). -->
         </div>
 
         <div class="call-controls">
-            <button id="startPreviewBtn" class="btn btn-primary">Start Camera Preview</button>
             <button class="call-control-btn" id="muteBtn" aria-label="Mute microphone" title="Mute microphone">🎤</button>
             <button class="call-control-btn" id="cameraToggleBtn" aria-label="Toggle camera" title="Toggle camera">📹</button>
-            <button class="call-control-btn" id="speechToggleBtn" aria-label="Toggle speech output" title="Toggle speech output">🔊</button>
-            <button class="call-control-btn end-call" id="endCallBtn" aria-label="End call" title="End call">📞</button>
+            <button class="call-control-btn" id="screenShareBtn" aria-label="Share screen" title="Share screen">🖥️</button>
+            <button class="call-control-btn end-call" id="endCallBtn" aria-label="Leave call" title="Leave call">📞</button>
         </div>
 
         <div class="call-info-grid">
@@ -50,10 +89,12 @@
             <span>Speech → Text: <span class="on">ON (planned)</span></span>
         </div>
     </div>
+
 </section>
 
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 <script src="{{ url_for('static', filename='js/video_call.js') }}"></script>
 {% endblock %}
